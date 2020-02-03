@@ -1,0 +1,96 @@
+ <!-- Sarah Bunger -->
+<!DOCTYPE html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="stylesheets/bunger20.css">
+	<title>Cheesecake Order Form</title>
+
+	<!-- jQuery API import-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- order and dropdown functionality-->
+	<script src="javascripts/basicFxns.js"></script>
+</head>
+
+<body>
+
+	<h1>Cheesecake Order Form</h1>
+
+	<img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Mondays_at_Il_Forno_-_Cheesecake_with_strawberry_sauce.jpg" width="250" height="250">
+
+	<table>
+		<!-- headers ------>
+		<tr>
+		    <td>Quantity</td>
+		    <td>Topping</td>
+	  	</tr>
+
+	  	<!-- contents ----->
+	  	<tr>
+		    <td> 
+		    	<!-- dropdown ---->
+		    	<select>
+					 <option value="1">1</option>
+					 <option value="2">2</option>
+					 <option value="3" selected>3</option>
+					 <option value="4">4</option>					 
+					 <option value="many">ALL the cheesecake!!!</option>
+				</select> 
+			</td>
+		    <td>
+		    	<!-- radio button ---->
+		    	 <form>
+					 <input type="radio" name="topping" value="plain" checked> Plain<br>
+					 <input type="radio" name="topping" value="cherry"> Cherry<br>
+					 <input type="radio" name="topping" value="chocolate"> Chocolate
+				</form> 
+		    </td>
+	  	</tr>
+	</table> 
+
+	<!-- a separate group so that the label and textbox move together ---->
+	<div class="notes_group">
+		<p>Notes:</p>
+
+		<textarea id="input" rows="4" cols="50">Enter any special instructions here.</textarea>
+
+	</div>
+
+	<br>	 
+
+	<!-- order button ---->
+	<input type="submit" class="order" value="Order">
+
+	<!-- a separate group so that the label and list move together ---->
+	<div class="orders_group">
+        <div class="dropdown">
+                <h3>Orders for </h3>
+                <span>
+                    <h3><button class="dropbtn" id="drop">Jan</button></h3>
+                    <div class="dropdown-content">
+                        <a href="#" selected>Jan</a>
+                        <a href="#">Feb</a>
+                        <a href="#">Mar</a>
+                        <a href="#">Apr</a>
+                        <a href="#">May</a>
+                        <a href="#">Jun</a>
+                        <a href="#">Jul</a>
+                        <a href="#">Aug</a>
+                        <a href="#">Sep</a>
+                        <a href="#">Oct</a>
+                        <a href="#">Nov</a>
+                        <a href="#">Dec</a>
+                    </div>
+                </span>
+        </div>
+
+		<p>
+			<ul>
+				<li>11 cherry</li>
+				<li>17 chocolate</li>
+				<li>31 plain</li>
+			</ul>
+		</p>
+	</div>
+
+</body>

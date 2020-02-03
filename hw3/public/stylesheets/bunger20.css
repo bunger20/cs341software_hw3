@@ -1,0 +1,92 @@
+/* Sarah Bunger */
+
+/*Creating columns of blank space on the left and right */
+body {
+  	background-color: lightblue;
+  	margin-left: 30%;
+  	margin-right: 30%;
+}
+
+div.notes_group {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.orders_group {
+	margin-top: 5%;
+	background: #3399ff;
+	text-align: center;
+}
+
+h1 {
+  color: white;
+  background: navy;
+  text-align: center;
+  font-style: italic;
+  font-family: "Lucinda Consle";
+}
+
+img {
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+}
+
+th, td {
+  padding: 1%;
+}
+
+table {
+	width: 90%;
+}
+
+h3 {
+    font-family: "Verdana";
+    display: inline;
+}
+
+/* reference: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown_hover */
+.dropbtn {
+	background-color: rgb(97, 76, 175);
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+  }
+  
+  .dropdown {
+	position: relative;
+    display: inline-block;    
+  }
+  
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+    width: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height:75px;
+    overflow-y:auto;
+  }
+
+  span{
+    display: inline-block;
+}
+
+/* Handle mouse interaction with the dropdown; things like highlights and shadows of where curser is */
+  
+  .dropdown-content a {
+	color: black;
+    padding: 12px 16px;
+	text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
