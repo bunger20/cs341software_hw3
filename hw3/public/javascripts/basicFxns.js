@@ -7,6 +7,16 @@ $(document).ready(function () {
     dropdownSelectionHandler = function() {
         //reference: https://stackoverflow.com/questions/43876827/hover-drop-down-button
         $("#drop")[0].innerHTML = this.innerHTML;
+        console.log("dropdown selected");
+        // $.post('/', {'key': 'value'},
+        //     function(data,status){
+        //         alert("Data: " + data + "\nStatus: " + status);
+        // });
+        //TODO fix hard coded month Jan
+        $.post( "orders" ,function( data, status, xhr ) {
+            console.log(data);
+            $( "h3" ).html( data );
+          });
     }
 
     orderButtonClickHandler = function(){
@@ -56,5 +66,9 @@ $(document).ready(function () {
     $(function() {
         $("a").click(dropdownSelectionHandler);
         $("input.order").click(orderButtonClickHandler);
+    });
+
+    $(document).ajaxError(function(event, req, settings){
+        console.log(event);
     });
 });
