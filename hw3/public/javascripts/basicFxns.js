@@ -8,15 +8,14 @@ $(document).ready(function () {
         //reference: https://stackoverflow.com/questions/43876827/hover-drop-down-button
         $("#drop")[0].innerHTML = this.innerHTML;
         console.log("dropdown selected");
-        // $.post('/', {'key': 'value'},
-        //     function(data,status){
-        //         alert("Data: " + data + "\nStatus: " + status);
-        // });
-        //TODO fix hard coded month Jan
-        $.post( "orders" ,function( data, status, xhr ) {
-            console.log(data);
-            $( "h3" ).html( data );
-          });
+        
+        $.post( "/orders",null,function( data, status, xhr ) {            
+            console.log("Data: " + data[0]["topping"]);
+            //update the bullets with the information from the JavaScript Object, which is NOT in JSON notation at this point
+            $("#bullet1").text(data["0"]["quantity"] + " " + data["0"]["topping"]);
+            $("#bullet2").text(data["1"]["quantity"] + " " + data["1"]["topping"]);
+            $("#bullet3").text(data["2"]["quantity"] + " " + data["2"]["topping"]);
+        });
     }
 
     orderButtonClickHandler = function(){

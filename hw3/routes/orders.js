@@ -15,10 +15,6 @@ router.get('/orderNumbers', function(req, res, next) {
   res.json(['0', '1', '2']);
 });
 
-router.get('/', function(req, res, next) {
-  next(createError(404));
-});
-
 // response to request for data for specific categories, as specified by URL encoding
 router.get('/orderData', function(req, res, next){
   console.log("Request: " + req.query.cat);
@@ -44,12 +40,8 @@ router.get('/orderData', function(req, res, next){
   res.json(contents);
 });
 
-router.post('/orders', function(req, res, next){
-  var jsonContents = req.query.cat;
-  console.log('what the frick', jsonContents);
-  res.send(jsonContents);
+router.post('/', function(req, res, next){
+  res.send(dummyData);
 });
-
-//router.post() could just change the .get to .post, maybe 
 
 module.exports = router;
