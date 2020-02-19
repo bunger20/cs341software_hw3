@@ -3,7 +3,9 @@
 var express = require('express');
 var router = express.Router();
 var createError = require('http-errors');
-var conversionHelper = require('../routes/ordersHelperFunctions')
+var conversionHelper = require('../routes/ordersHelperFunctions');
+var dbms = require('../routes/dbms');
+
 
 //hard-coded data, for use before we have linked the database
 var dummyData = {0: {topping: "cherry", quantity: 2}, 1: {topping: "plain", quantity: 6}, 2: {topping: "chocolate", quantity: 3}};
@@ -40,8 +42,62 @@ router.get('/orderData', function(req, res, next){
   res.json(contents);
 });
 
+
+//server side post -------------------------------------------------------------
 router.post('/', function(req, res, next){
-  res.send(dummyData);
+  
+  console.log("req body ", req.body);
+
+  //req.body is a JSON with key = month and value = "Feb" (or other month)
+  var selectedMonth = req.body;
+  console.log("MONTH: " + selectedMonth["month"]);
+
+  //query for data from the selected month
+  dbms.dbquery("SELECT * FROM Orders WHERE month='" + selectedMonth["month"] + "'", 
+    function(error, results){
+      //the results that come back are JSON objects for each of the applicable entries, with each column as the key
+      // console.log(results);
+      // console.log(results[0]["OrderID"]);
+      // console.log(results[1].OrderID);
+
+      var toppingData = {};
+      var numCherry = 0;
+      var numPlain = 0;
+      var numChocolate = 0;
+
+      if (results === []){
+        toppingData = {"cherry" : numCherry, "plain" : numPlain, "chocolate" : numChocolate};
+        res.send(toppingData);
+        return;
+      }
+
+      //iterate throught each item in results, looking at its topping type and incrementing accordingly
+      for (i of results){
+        // console.log(results[2]["Topping"] + "######################");
+        // console.log(i.OrderID + "6666666gkgkfkk");
+        // console.log(i.OrderID);
+        if (i.Topping === "cherry"){
+          numCherry++;
+          //console.log(numCherry + "Lorem ipsum");
+        }
+        else if (i.Topping === "plain"){
+          numPlain++;
+          //console.log(numPlain + "sit dolor");
+
+        }
+        else{
+          numChocolate++;
+          //console.log(numChocolate + "ARGHm");
+        }
+      }
+
+      //make and send back a JSON of the 3 topping types as keys and the quantity as values
+      toppingData = {"cherry" : numCherry, "plain" : numPlain, "chocolate" : numChocolate};
+      console.log(toppingData);
+      res.send(toppingData);
+    }
+  );
+
 });
 
 module.exports = router;

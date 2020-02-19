@@ -7,15 +7,18 @@ $(document).ready(function () {
     dropdownSelectionHandler = function() {
         //reference: https://stackoverflow.com/questions/43876827/hover-drop-down-button
         $("#drop")[0].innerHTML = this.innerHTML;
-        console.log("dropdown selected");
+        console.log("dropdown selected!@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        console.log(this.innerHTML);
+        var selectedMonth = this.innerHTML;
         
-        $.post( "/orders",null,function( data, status, xhr ) {            
-            console.log("Data: " + data[0]["topping"]);
+        $.post( "/orders",{month : selectedMonth},function( data, status, xhr ) {            
+            console.log(selectedMonth);
             //update the bullets with the information from the JavaScript Object, which is NOT in JSON notation at this point
-            $("#bullet1").text(data["0"]["quantity"] + " " + data["0"]["topping"]);
-            $("#bullet2").text(data["1"]["quantity"] + " " + data["1"]["topping"]);
-            $("#bullet3").text(data["2"]["quantity"] + " " + data["2"]["topping"]);
+            $("#bullet1").text("Cherry: " + data["cherry"]);
+            $("#bullet2").text("Plain: " + data["plain"]);
+            $("#bullet3").text("Chocolate: " + data["chocolate"]);
         });
+
     }
 
     orderButtonClickHandler = function(){
@@ -58,6 +61,11 @@ $(document).ready(function () {
 
             $("img").after("Number ordered: " + dropdownValue + "<br>");
             $("img").after("Thank you! Your order has been placed. <br>");
+
+            $.post( "/newOrder",{quantity : dropdownValue, topping : radioValue, notes : input},function( data, status, xhr ) {            
+                console.log("here!");
+                //console.log(data["notes"]);
+            });
         }
     }
 
@@ -71,3 +79,4 @@ $(document).ready(function () {
         console.log(event);
     });
 });
+
